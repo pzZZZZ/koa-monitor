@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-
+let db = require('../controller/db.js')
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {
     title: 'Hello Koa 2!'
@@ -12,18 +12,19 @@ router.get('/string', async (ctx, next) => {
 
 router.get('/json', async (ctx, next) => {
   // ctx.body = {
-  //   title: 'koa2 json'
+  //   name: 123
   // }
-  ctx.throw(403)
+  let db = require('../controller/db.js')
 })
 router.get('/getError', async (ctx, next) => {
   console.log(ctx.req);
   if (ctx.query.type) {
     ctx.body = {
-      code:200,
+      code: 200,
       // data:ctx.query,
-      msg:'success'
+      msg: 'success'
     }
+    db(ctx)
   } else {
     ctx.body = {
       code: 200,
